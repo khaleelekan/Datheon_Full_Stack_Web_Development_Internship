@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Taskboard</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main>
+  <h1>Taskboard</h1>
+  <p class="sub">Plan it, tick it off. Everything stays in this browser.</p>
+
+  <form class="add" id="addForm" autocomplete="off">
+    <input type="text" id="text" placeholder="What needs doing?" aria-label="Task title" maxlength="140" required>
+    <select id="cat" aria-label="Category"><option>Work</option><option>Personal</option><option>Study</option></select>
+    <input type="date" id="due" aria-label="Due date">
+    <button class="primary" type="submit">Add task</button>
+  </form>
+
+  <div class="bar">
+    <div class="tabs" id="tabs" role="group" aria-label="Filter by status">
+      <button data-f="all" aria-pressed="true">All</button>
+      <button data-f="active" aria-pressed="false">Active</button>
+      <button data-f="completed" aria-pressed="false">Completed</button>
+    </div>
+    <input class="search" id="search" type="search" placeholder="Search tasks" aria-label="Search tasks">
+  </div>
+
+  <ul id="list" aria-live="polite"></ul>
+  <div class="foot"><span id="count"></span><button id="clear" type="button">Clear completed</button></div>
+</main>
+
+<script src="js/app.js"></script>
+</body>
+</html>
