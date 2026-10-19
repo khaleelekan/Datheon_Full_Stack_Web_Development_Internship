@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HaydeeFooties - Premium Footwear Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="announcement-bar">
+        🚚 Free delivery on orders over ₦50,000 | Contact Us: +234 915 255 9516 | @haydee_footies
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">H</div>
+                <span>HaydeeFooties</span>
+            </a>
+
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search sneakers, crocs, loafers...">
+            </div>
+
+            <div class="nav-actions">
+                <div class="currency-selector">
+                    <select id="currencySelect">
+                        <option value="NGN">₦ NGN</option>
+                        <option value="USD">$ USD</option>
+                    </select>
+                </div>
+
+                <div class="account-menu">
+                    <button class="account-btn" id="accountBtn">
+                        <i class="fas fa-user"></i>
+                        <span id="accountLabel">Login</span>
+                    </button>
+                    <div class="account-dropdown" id="accountDropdown">
+                        <a href="#" id="loginLink"><i class="fas fa-sign-in-alt"></i> Login / Register</a>
+                        <a href="#" id="profileLink" style="display:none;"><i class="fas fa-user-circle"></i> My Account</a>
+                        <a href="#" id="wishlistLink"><i class="fas fa-heart"></i> Wishlist (<span id="wishlistCount">0</span>)</a>
+                        <a href="#" id="ordersLink" style="display:none;"><i class="fas fa-box"></i> My Orders</a>
+                        <a href="#" id="logoutLink" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+
+                <button class="cart-btn" id="openCartBtn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="hero-subtitle">Quality & Style Guaranteed</span>
+                <h1 class="hero-title">Your Favourite Plug for Stylish and Quality Footies.</h1>
+                <p class="hero-description">Explore our curated collection of Sneakers, Crocs, Loafers, Female Flats, Male Shoes, and Slides tailored for absolute comfort and sleek style.</p>
+                <div class="hero-badges">
+                    <span class="badge"><i class="fas fa-check-circle"></i> 100% Authentic</span>
+                    <span class="badge"><i class="fas fa-truck"></i> Fast Delivery</span>
+                    <span class="badge"><i class="fas fa-headset"></i> 24/7 Support</span>
+                </div>
+                <a href="#catalog" class="btn btn-primary">Shop Collection <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-image">
+                <div class="hero-card">
+                    <div class="hero-tag">Best Sellers</div>
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=800" alt="Premium Loafers">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content / Catalog -->
+    <main class="container" id="catalog">
+        <div class="section-header">
+            <h2>Our Products</h2>
+            <div class="sort-wrapper">
+                <label for="sortBy">Sort by:</label>
+                <select id="sortBy">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="rating">Highest Rated</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="categories-bar" id="categoryFilters">
+            <button class="category-btn active" data-category="all">All Footwear</button>
+            <button class="category-btn" data-category="Sneakers">Sneakers</button>
+            <button class="category-btn" data-category="Crocs">Crocs</button>
+            <button class="category-btn" data-category="Female Flats">Female Flats</button>
+            <button class="category-btn" data-category="Loafers">Loafers</button>
+            <button class="category-btn" data-category="Male Shoes">Male Shoes</button>
+            <button class="category-btn" data-category="Slides">Slides</button>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+    </main>
+
+    <!-- Slide-out Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag"></i> Your Cart (<span id="drawerCartCount">0</span>)</h3>
+            <button class="close-btn" id="closeCartBtn">&times;</button>
+        </div>
+
+        <div class="cart-items" id="cartItems"></div>
+
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotalAmount">₦0</span>
+            </div>
+            <div class="summary-row">
+                <span>Estimated Tax (5%)</span>
+                <span id="taxAmount">₦0</span>
+            </div>
+            <div class="summary-row">
+                <span>Delivery Fee</span>
+                <span id="shippingAmount">₦2,500</span>
+            </div>
+
+            <div class="promo-code-section">
+                <input type="text" id="promoCodeInput" placeholder="Promo code">
+                <button id="applyPromoBtn" class="btn-small">Apply</button>
+            </div>
+            <div class="summary-row discount-row" id="discountRow" style="display:none;">
+                <span>Discount</span>
+                <span id="discountAmount">-₦0</span>
+                <button id="removePromoBtn" class="remove-promo-btn">&times;</button>
+            </div>
+
+            <div class="summary-row total-row">
+                <span>Total</span>
+                <span id="totalAmount">₦0</span>
+            </div>
+
+            <button class="btn btn-primary btn-block" id="checkoutBtn">
+                Proceed to Checkout <i class="fas fa-lock"></i>
+            </button>
+            <button class="btn btn-outline btn-block" id="continueShoppingBtn" style="margin-top:10px;">Continue Shopping</button>
+            <button id="clearCartBtn" class="clear-cart-btn">Clear Cart</button>
+        </div>
+    </aside>
+
+    <!-- Wishlist Drawer -->
+    <div class="wishlist-overlay" id="wishlistOverlay"></div>
+    <aside class="wishlist-drawer" id="wishlistDrawer">
+        <div class="cart-header">
+            <h3><i class="fas fa-heart"></i> Your Wishlist (<span id="drawerWishlistCount">0</span>)</h3>
+            <button class="close-btn" id="closeWishlistBtn">&times;</button>
+        </div>
+        <div class="cart-items" id="wishlistItems"></div>
+    </aside>
+
+    <!-- Quick View Modal -->
+    <div class="modal-overlay" id="quickViewModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeModalBtn">&times;</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-content checkout-modal-content">
+            <button class="close-btn" id="closeCheckoutBtn">&times;</button>
+            <div class="modal-header">
+                <h3>Complete Your Order</h3>
+            </div>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="custName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" id="custEmail" required placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone / WhatsApp Number *</label>
+                    <input type="tel" id="custPhone" required placeholder="+234 800 000 0000">
+                </div>
+                <div class="form-group">
+                    <label>Delivery Address *</label>
+                    <textarea id="custAddress" required placeholder="Full delivery address in Nigeria"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="payment-methods">
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="paystack" checked>
+                            <span class="payment-card-icon"><i class="fas fa-credit-card"></i></span>
+                            <span>Card / Paystack</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="flutterwave">
+                            <span class="payment-card-icon"><i class="fas fa-bolt"></i></span>
+                            <span>Flutterwave</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="bank">
+                            <span class="payment-card-icon"><i class="fas fa-university"></i></span>
+                            <span>Bank Transfer</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="whatsapp">
+                            <span class="payment-card-icon"><i class="fab fa-whatsapp"></i></span>
+                            <span>Order via WhatsApp</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="cod">
+                            <span class="payment-card-icon"><i class="fas fa-truck"></i></span>
+                            <span>Pay on Delivery</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="bank-transfer-details" id="bankTransferDetails" style="display:none;">
+                    <h4><i class="fas fa-university"></i> Bank Transfer Details</h4>
+                    <p><strong>Bank:</strong> GTBank</p>
+                    <p><strong>Account Name:</strong> Haydee Footies</p>
+                    <p><strong>Account Number:</strong> 0123456789</p>
+                    <p class="bank-note">After payment, send proof to WhatsApp: +234 915 255 9516</p>
+                </div>
+
+                <div class="order-total-preview">
+                    <span>Grand Total:</span>
+                    <strong id="modalGrandTotal">₦0</strong>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="confirmOrderBtn">
+                    <span id="confirmOrderLabel">Pay Now</span> <i class="fas fa-lock"></i>
+                </button>
+                <p class="secure-note"><i class="fas fa-shield-alt"></i> Secured payments powered by Paystack & Flutterwave</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div class="modal-overlay" id="receiptModal">
+        <div class="modal-content receipt-modal">
+            <div class="receipt-icon"><i class="fas fa-check-circle"></i></div>
+            <h2>Payment Successful!</h2>
+            <p class="receipt-subtitle">Thank you for shopping with HaydeeFooties</p>
+            <div class="receipt-details" id="receiptDetails"></div>
+            <button class="btn btn-primary btn-block" id="closeReceiptBtn">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Login / Register Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-content auth-modal">
+            <button class="close-btn" id="closeLoginBtn">&times;</button>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="register">Register</button>
+            </div>
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" required placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="regName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="regEmail" required placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeProfileBtn">&times;</button>
+            <h2>My Account</h2>
+            <div class="profile-info">
+                <p><strong>Name:</strong> <span id="profileName"></span></p>
+                <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+            </div>
+            <button class="btn btn-primary btn-block" id="viewOrdersBtn" style="margin-top:20px;">View My Orders</button>
+        </div>
+    </div>
+
+    <!-- Orders Modal -->
+    <div class="modal-overlay" id="ordersModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeOrdersBtn">&times;</button>
+            <h2>My Orders</h2>
+            <div id="ordersList" class="orders-list"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h3>HaydeeFooties</h3>
+                <p>Your ultimate destination for quality, comfortable, and trendy footwear in Nigeria.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#catalog">Sneakers</a></li>
+                    <li><a href="#catalog">Crocs</a></li>
+                    <li><a href="#catalog">Loafers</a></li>
+                    <li><a href="#catalog">Female Flats</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Details</h4>
+                <p><i class="fab fa-whatsapp"></i> +234 915 255 9516</p>
+                <p><i class="fab fa-instagram"></i> @haydee_footies</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 HaydeeFooties. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <button id="backToTopBtn" class="back-to-top"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
